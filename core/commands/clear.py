@@ -1,2 +1,6 @@
+import os
 def clear():
-    pass
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')    

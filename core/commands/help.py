@@ -5,6 +5,8 @@ help
 about
 clear
 shutdown
+version          
+date.time          
 """)
 
     
