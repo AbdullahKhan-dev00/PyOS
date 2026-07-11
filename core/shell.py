@@ -12,6 +12,10 @@ def shell():
     elif commands == "clear":
         clear()
     elif commands == "shutdown":
-        shutdown()        
+        shutdown()       
+    else:
+        print(f"""Unknown Command: {commands}
+Type "help" to see available commands
+""")     
 
         

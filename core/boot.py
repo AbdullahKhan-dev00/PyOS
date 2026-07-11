@@ -1,7 +1,8 @@
 from core.shell import shell
 
 def boot_screen():
-    print("""===========
+    print("""
+    ===========      
     PyOS v0.1.0
     ===========
     Loading kernel...

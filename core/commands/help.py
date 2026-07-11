@@ -1,9 +1,10 @@
 def help():
-    print("""Available commands:
-    help
-    about
-    clear
-    shutdown
-    """)
+    print("""Available Commands
+------------------
+help
+about
+clear
+shutdown
+""")
 
     
