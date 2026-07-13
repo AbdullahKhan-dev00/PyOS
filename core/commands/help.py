@@ -6,7 +6,8 @@ about
 clear
 shutdown
 version          
-date.time          
+date.time  
+create user                  
 """)
 
     
