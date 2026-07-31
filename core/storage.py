@@ -1,9 +1,10 @@
 import json
 
 
-def load_user():
-    with open("data/users.json") as file:
+def load_users():
+    with open("data/users.json", "r") as file:
         user_data = json.load(file)
+    return user_data
 
 def save_user(user):
   with open("data/users.json", "r") as file:
