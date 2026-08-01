@@ -1,6 +1,5 @@
 from core.shell import shell
 import time
-
 def boot_screen():
     print("""
     ===========      
@@ -17,8 +16,8 @@ def boot_screen():
     time.sleep(3)
     print("""Welcome to PyOS!
     Type "help" to see available commands""")
-    
-    while True:
-        shell()
 
+
+while True:
+    shell()    
 

@@ -1,5 +1,5 @@
 # This is the control file for users
-from storage import load_users
+from core.storage import load_users
 def create_user():
     user_data = load_users()
     username = input("Enter username: ")
@@ -24,15 +24,13 @@ def login():
         if username == user["username"]:
             password = input("Enter password: ").strip()
             if password == user["password"]:
-                 print("Logged In Successfuflly")
-                 current_user = user
-                 return current_user
-                 break
+                print("Logged In Successfuflly!")
+                current_user = user
+                return current_user
+                break
             else:
-                print("Incorrect Password")   
-                return None 
+                print("Incorrect Password!")   
+                return None
         else:
             return None
-     
-
-login()    
+           
