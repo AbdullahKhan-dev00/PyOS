@@ -1,8 +1,13 @@
 from datetime import datetime
-TRIGGERS = ("date", "time", "3")
-DESCRIPTION = "Displays current date and time"
+from zoneinfo import ZoneInfo
+from core.rich_ui import console, CYAN, YELLOW
 
-def date_time():
-    now = datetime.now()
-    date_time_format = now.strftime("%B %d, %Y, %I:%M %p")
-    print(date_time_format)
+TRIGGERS = ("date", "time", "datetime", "3")
+DESCRIPTION = "Displays current system date and time"
+
+def run():
+    # Set explicitly to PKT (Asia/Karachi)
+    now = datetime.now(ZoneInfo("Asia/Karachi"))
+    formatted = now.strftime("%A, %B %d, %Y | %I:%M %p")
+    
+    console.print(f"[{CYAN}]🕒 System Clock:[/{CYAN}] [{YELLOW}]{formatted}[/{YELLOW}]")

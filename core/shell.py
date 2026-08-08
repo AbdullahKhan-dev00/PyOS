@@ -1,13 +1,15 @@
 import importlib
 import pkgutil
+import shlex
 import core.commands
+from core.rich_ui import console, show_boot_banner, get_input, show_welcome, print_error, print_success
 
-# The active command registry
 COMMANDS = {}
 
 def load_commands():
-    """Scans core/commands/ and populates the COMMANDS registry."""
     COMMANDS.clear()
+    
+    console.print("[dim white][*] Scanning kernel modules...[/dim white]")
     
     for _, module_name, _ in pkgutil.iter_modules(core.commands.__path__):
         full_module_name = f"core.commands.{module_name}"
@@ -17,30 +19,48 @@ def load_commands():
         run_func = getattr(module, "run", None)
         
         if run_func:
-            # Attach description & triggers for help.py to inspect dynamically
             setattr(run_func, "description", getattr(module, "DESCRIPTION", "No description."))
             setattr(run_func, "triggers", triggers)
 
             for trigger in triggers:
                 COMMANDS[trigger.lower()] = run_func
 
-# Automatically load commands ONCE when shell.py is imported by boot.py
+    print_success(f"Loaded {len(COMMANDS)} command triggers into memory.\n")
+
 load_commands()
 
 
-def shell():
-    """Gets user input and dispatches the command (called repeatedly by boot.py)."""
-    user_input = input("PyOS> ").lower().strip()
+def shell(active_user):
+    """Gets user input using the active user's username for the prompt."""
+    username = active_user.get("username", "root") if isinstance(active_user, dict) else "root"
+    
+    # Renders: username@pyos:~ $
+    user_input = get_input(username).strip()
     
     if not user_input:
         return
 
-    handler = COMMANDS.get(user_input)
+    # Split command from arguments safely (preserving quoted strings)
+    try:
+        parts = shlex.split(user_input)
+    except ValueError:
+        parts = user_input.split()
+
+    cmd_name = parts[0].lower()
+    args = parts[1:]
+
+    handler = COMMANDS.get(cmd_name)
     
     if handler:
-        # Pass COMMANDS dict if run() accepts arguments (like help.py does)
-        handler(COMMANDS) if handler.__code__.co_argcount > 0 else handler()
+        # If run() expects arguments (like echo or help)
+        if handler.__code__.co_argcount > 0:
+            # Pass args if available, otherwise fallback to COMMANDS dict for help.py
+            if args:
+                handler(args)
+            else:
+                handler(COMMANDS)
+        else:
+            handler()
     else:
-        print(f'Unknown Command: "{user_input}"\nType "help" to see available commands\n')
-
-        
+        print_error(f'Command not found: "{cmd_name}"')
+        console.print('[dim white]Type [bold cyan]"help"[/bold cyan] to list all registered system commands.[/dim white]\n')
