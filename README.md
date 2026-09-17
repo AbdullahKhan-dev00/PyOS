@@ -1,112 +1,69 @@
 # 🚀 PyOS
 
-> An extensible terminal operating system, featuring a virtual file system, apps, users, and more, written from scratch in Python. A modular terminal-based operating system built entirely in Python.
+> An extensible terminal operating system simulation, featuring a modular command system, users, applications, persistent data, and more — built from scratch in Python.
 
-PyOS is a long-term learning project that simulates the core concepts of an operating system inside a terminal. It is being developed from scratch to strengthen programming, software architecture, and problem-solving skills while building a feature-rich application.
+PyOS is a long-term software development and learning project that simulates operating-system concepts inside a terminal environment.
+
+It is being developed from scratch to strengthen Python programming, software architecture, modular design, data persistence, authentication, problem-solving, and general software-engineering skills while gradually building a feature-rich terminal environment.
 
 ---
 
 ## 🎯 Project Goals
 
-- Build a modular terminal-based operating system.
-- Learn Python by creating real software instead of isolated exercises.
-- Practice clean code, project architecture, and version control.
-- Continuously improve the project as new Python concepts are learned.
+- Build a modular terminal-based operating system simulation.
+- Learn Python through a real, continuously evolving software project.
+- Practice software architecture and separation of responsibilities.
+- Learn how to design systems that can grow without becoming difficult to maintain.
+- Practice persistent data storage and user management.
+- Improve debugging, problem-solving, and development workflow.
+- Continuously improve PyOS as new concepts and technologies are learned.
 
 ---
 
-## 🛠 Planned Features
+## ✨ Current Features
 
-### Core System
-- Boot screen
+PyOS has evolved beyond its original basic terminal prototype.
+
+### 🖥️ Core System
+
+- Boot screen and startup sequence
+- Interactive command-line shell
+- Modular command architecture
+- Dynamic command discovery and loading
+- Command aliases
+- Automatic command help system
+- Built-in system commands
+- Rich terminal interface
+
+### 🔐 User System
+
+- User account creation
+- Username validation
+- Duplicate username detection
+- Password confirmation
+- Persistent user data
 - Login system
-- Command-line shell
+- Current-user/session handling
+
+### 💾 Data Storage
+
+PyOS currently uses JSON-based storage for persistent data.
+
+Current data includes:
+
 - User accounts
-- Settings
-- Command history
-
-### Virtual File System
-- Create directories
-- Navigate directories
-- Create, rename, copy, move, and delete files
-- File permissions
-
-### Built-in Applications
-- Calculator
-- Text Editor
-- Clock
-- Calendar
-- File Explorer
-
-### Games
-- PyRPG *(planned)*
-- More terminal games in future releases
-
-### Data Management
-- Persistent data storage
-- User profiles
 - System settings
-- Logs
-- Virtual filesystem data
 
----
+The storage system will continue to evolve as PyOS develops.
 
-## 📂 Project Structure
+### 🧩 Dynamic Commands
 
-```text
-PyOS/
-│
-├── main.py
-├── README.md
-├── ROADMAP.md
-├── CHANGELOG.md
-│
-├── core/
-├── apps/
-├── data/
-├── users/
-├── docs/
-└── assets/
-```
+PyOS uses a modular command system where commands can be placed inside the command directory and discovered by the system automatically.
 
-> The structure will continue evolving as PyOS grows.
+Seee **[ROADMAP.md](ROADMAP.md)**
 
----
+A command can define information such as:
 
-## 📈 Current Status
-
-Current Version: **v0.1.0**
-
-Project Status: **Under Development**
-
-This project is in its early stages. Features will be added incrementally through future versions.
-
----
-
-## 🎯 Philosophy
-
-PyOS is not intended to compete with real operating systems.
-
-Its purpose is to explore software engineering concepts through hands-on development while continually improving code quality, architecture, and design.
-
----
-
-## 🗺 Roadmap
-
-See **ROADMAP.md** for upcoming features and development milestones.
-
----
-
-## 📜 Changelog
-
-See **CHANGELOG.md** for version history.
-
----
-
-## 👨‍💻 Developer
-
-**Abdullah Khan**
-
-Started: **July 2026**
-
-*"Learning by building. Improving one version at a time."*
+```python
+TRIGGERS = ("example", "ex")
+DESCRIPTION = "Example command"
